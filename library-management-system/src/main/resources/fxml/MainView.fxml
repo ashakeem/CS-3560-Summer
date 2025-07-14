@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.cs3560.library.ui.MainController">
+    <top>
+        <VBox>
+            <MenuBar>
+                <menus>
+                    <Menu text="File">
+                        <items>
+                            <MenuItem text="Exit" onAction="#handleExit"/>
+                        </items>
+                    </Menu>
+                    <Menu text="Help">
+                        <items>
+                            <MenuItem text="About" onAction="#handleAbout"/>
+                        </items>
+                    </Menu>
+                </menus>
+            </MenuBar>
+            <Label text="CS3560 Library Management System" 
+                   style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 10px;"/>
+        </VBox>
+    </top>
+    
+    <center>
+        <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Students">
+                    <content>
+                        <fx:include source="StudentView.fxml"/>
+                    </content>
+                </Tab>
+                <Tab text="Books">
+                    <content>
+                        <fx:include source="BookView.fxml"/>
+                    </content>
+                </Tab>
+                <Tab text="Book Copies">
+                    <content>
+                        <fx:include source="BookCopyView.fxml"/>
+                    </content>
+                </Tab>
+                <Tab text="Loans">
+                    <content>
+                        <fx:include source="LoanView.fxml"/>
+                    </content>
+                </Tab>
+                <Tab text="Reports">
+                    <content>
+                        <fx:include source="ReportView.fxml"/>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+    
+    <bottom>
+        <HBox alignment="CENTER" spacing="10" style="-fx-padding: 5px; -fx-background-color: #f0f0f0;">
+            <Label fx:id="statusLabel" text="Ready"/>
+        </HBox>
+    </bottom>
+</BorderPane> 

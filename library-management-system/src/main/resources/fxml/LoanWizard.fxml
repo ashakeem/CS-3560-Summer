@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.cs3560.library.ui.LoanWizardController">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    
+    <center>
+        <StackPane fx:id="wizardStack">
+            <!-- Step 1: Select Student -->
+            <VBox fx:id="step1" spacing="10" visible="true">
+                <Label text="Step 1: Select Student" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <Separator/>
+                <HBox spacing="10">
+                    <TextField fx:id="studentSearchField" promptText="Search student by name..." prefWidth="300"/>
+                    <Button text="Search" onAction="#searchStudents"/>
+                </HBox>
+                <TableView fx:id="studentTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="studentIdColumn" text="Bronco ID" prefWidth="100"/>
+                        <TableColumn fx:id="studentNameColumn" text="Name" prefWidth="200"/>
+                        <TableColumn fx:id="studentDegreeColumn" text="Degree" prefWidth="150"/>
+                    </columns>
+                </TableView>
+            </VBox>
+            
+            <!-- Step 2: Select Books -->
+            <VBox fx:id="step2" spacing="10" visible="false">
+                <Label text="Step 2: Select Book Copies" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <Separator/>
+                <HBox spacing="10">
+                    <TextField fx:id="bookSearchField" promptText="Search books by title, author, or ISBN..." prefWidth="400"/>
+                    <Button text="Search" onAction="#searchBooks"/>
+                </HBox>
+                <Label text="Search Results:"/>
+                <TableView fx:id="bookSearchTable" prefHeight="200">
+                    <columns>
+                        <TableColumn fx:id="bookIsbnColumn" text="ISBN" prefWidth="120"/>
+                        <TableColumn fx:id="bookTitleColumn" text="Title" prefWidth="250"/>
+                        <TableColumn fx:id="bookAuthorsColumn" text="Authors" prefWidth="200"/>
+                        <TableColumn fx:id="availableCopiesColumn" text="Available" prefWidth="80"/>
+                    </columns>
+                </TableView>
+                <Label text="Available Copies for Selected Book:"/>
+                <TableView fx:id="availableCopiesTable" prefHeight="150">
+                    <columns>
+                        <TableColumn fx:id="copyBarcodeColumn" text="Barcode" prefWidth="100"/>
+                        <TableColumn fx:id="copyLocationColumn" text="Location" prefWidth="150"/>
+                        <TableColumn fx:id="copySelectColumn" text="Select" prefWidth="60"/>
+                    </columns>
+                </TableView>
+                <Label fx:id="selectedCopiesLabel" text="Selected Copies: 0"/>
+            </VBox>
+            
+            <!-- Step 3: Set Due Date -->
+            <VBox fx:id="step3" spacing="10" visible="false">
+                <Label text="Step 3: Set Due Date" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <Separator/>
+                <GridPane hgap="10" vgap="10">
+                    <Label text="Due Date:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <DatePicker fx:id="dueDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <Label text="(Maximum 180 days from today)" style="-fx-text-fill: gray;" 
+                           GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                </GridPane>
+                <Label text="Loan Summary:" style="-fx-font-weight: bold; -fx-padding: 10 0 0 0;"/>
+                <TextArea fx:id="loanSummaryArea" editable="false" prefHeight="200" VBox.vgrow="ALWAYS"/>
+            </VBox>
+            
+            <!-- Step 4: Confirmation -->
+            <VBox fx:id="step4" spacing="10" visible="false" alignment="CENTER">
+                <Label text="Loan Created Successfully!" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: green;"/>
+                <Separator/>
+                <Label text="Loan Receipt" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <TextArea fx:id="receiptArea" editable="false" prefHeight="300" prefWidth="500" 
+                          style="-fx-font-family: monospace;"/>
+                <Button text="Print Receipt" onAction="#printReceipt"/>
+            </VBox>
+        </StackPane>
+    </center>
+    
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_RIGHT" style="-fx-padding: 10px;">
+            <Button fx:id="previousButton" text="Previous" onAction="#previousStep" disable="true"/>
+            <Button fx:id="nextButton" text="Next" onAction="#nextStep"/>
+            <Button fx:id="cancelButton" text="Cancel" onAction="#cancel"/>
+        </HBox>
+    </bottom>
+</BorderPane> 
